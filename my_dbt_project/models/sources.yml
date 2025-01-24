@@ -3,4 +3,4 @@ version: 2
 sources:
   - name: public
     tables:
-      - name: my_table2
+      - name: fifa_model_elt
