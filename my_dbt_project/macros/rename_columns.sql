@@ -1,11 +1,14 @@
-{% macro rename_column(column_list, old_name, new_name) %}
+{% macro rename_columns(table_name) %}
+    {% set columns = dbt_utils.get_columns_in_relation(table_name) %}
     {% set renamed_columns = [] %}
-    {% for column in column_list %}
-        {% if column.name == old_name %}
-            {% do renamed_columns.append(column.update(name=new_name)) %}
-        {% else %}
-            {% do renamed_columns.append(column) %}
-        {% endif %}
+
+    {% for column in columns %}
+        {% set new_column = column.name | lower | replace(" ", "_") | replace("/", "") %}
+        {% do renamed_columns.append(new_column) %}
     {% endfor %}
-    {{ renamed_columns }}
+
+    {% set renamed_columns_string = renamed_columns | join(', ') %}
+    
+    SELECT {{ renamed_columns_string }}
+    FROM {{ table_name }}
 {% endmacro %}

@@ -1,9 +1,9 @@
-{% macro drop_selected_columns(columns, drop_columns) %}
-    {% set remaining_columns = [] %}
+-- macros/format_columns.sql
+{% macro format_columns(columns) %}
+    {% set formatted_columns = [] %}
     {% for column in columns %}
-        {% if column not in drop_columns %}
-            {% do remaining_columns.append(column) %}
-        {% endif %}
+        {% set formatted_column = column | lower | replace(" ", "_") | replace("/", "") %}
+        {% do formatted_columns.append(formatted_column) %}
     {% endfor %}
-    {{ return(remaining_columns) }}
+    {{ return(formatted_columns) }}
 {% endmacro %}
