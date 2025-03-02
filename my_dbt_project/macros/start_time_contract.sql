@@ -7,7 +7,7 @@ CASE
     -- Quando o valor contém "Loan", remove " On Loan" e extrai o ano da data
     WHEN {{ column }} LIKE '%Loan%' THEN
         CAST(
-            EXTRACT(YEAR FROM TO_DATE(REPLACE({{ column }}, ' On Loan', ''), 'Mon DD, YYYY'))
+            EXTRACT(YEAR FROM TO_DATE({{ strip_affix(column, ' On Loan') }}, 'Mon DD, YYYY'))
             AS TEXT
         )
 

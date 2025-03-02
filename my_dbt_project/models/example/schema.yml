@@ -1,7 +1,7 @@
 version: 2
 
 models:
-  - name: elt_fifa_clean
+  - name: clean_fifa_model_elt
     description: "A starter dbt model"
     columns:
       - name: id

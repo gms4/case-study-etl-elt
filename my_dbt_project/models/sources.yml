@@ -1,6 +1,6 @@
 version: 2
 
 sources:
-  - name: public
+  - name: staging
     tables:
-      - name: fifa_model_elt
+      - name: unclean_fifa_model_elt
