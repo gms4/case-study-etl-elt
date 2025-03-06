@@ -56,7 +56,7 @@ Detailed dbt configuration instructions can be found in the official documentati
 To run the ETL Pipeline, follow these steps:
 
 1. Execute the `estudo_de_caso_etl.ipynb` script.
-2. Check the `clean_fifa_model_etl` table in the PostgreSQL database to see the processed data.
+2. Check the `analytics.etl_clean_fifa_model` table in the PostgreSQL database to see the processed data.
 
 ### ELT Pipeline
 To run the ELT Pipeline, follow these steps:
@@ -67,7 +67,8 @@ To run the ELT Pipeline, follow these steps:
    ```bash
    dbt run
    ```
-4. Check the `clean_fifa_model_elt` table in the PostgreSQL database to see the processed data.
+4. Check the `staging.staging_fifa_model_elt` table in the PostgreSQL database to see the raw data.
+5. Check the `analytics.elt_clean_fifa_model` table in the PostgreSQL database to see the processed data.
 
 ---
 
