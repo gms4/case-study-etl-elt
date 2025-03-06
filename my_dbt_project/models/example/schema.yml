@@ -1,11 +1,72 @@
 version: 2
 
 models:
-  - name: clean_fifa_model_elt
-    description: "A starter dbt model"
+  - name: ELT_clean_fifa_model
+    description: "A starter dbt model with additional data quality tests"
     columns:
       - name: id
         description: "The primary key for this table"
         tests:
           - unique
           - not_null
+
+      - name: name
+        description: "Player name"
+        tests:
+          - not_null
+
+      - name: height_cm
+        description: "Height in centimeters"
+        tests:
+          - not_null
+          - dbt_expectations.expect_column_values_to_be_of_type:
+              column_type: integer
+
+      - name: weight_kg
+        description: "Weight in kilograms"
+        tests:
+          - not_null
+          - dbt_expectations.expect_column_values_to_be_of_type:
+              column_type: integer
+
+      - name: wf
+        description: "Weak Foot rating"
+        tests:
+          - dbt_expectations.expect_column_values_to_be_of_type:
+              column_type: integer
+
+      - name: sm
+        description: "Skill Moves rating"
+        tests:
+          - dbt_expectations.expect_column_values_to_be_of_type:
+              column_type: integer
+
+      - name: ir
+        description: "International Reputation rating"
+        tests:
+          - dbt_expectations.expect_column_values_to_be_of_type:
+              column_type: integer
+
+      - name: value_in_euro_millions
+        description: "Player market value in millions of euros"
+        tests:
+          - dbt_expectations.expect_column_values_to_be_of_type:
+              column_type: double precision
+
+      - name: wage_in_euros
+        description: "Player weekly wage in euros"
+        tests:
+          - dbt_expectations.expect_column_values_to_be_of_type:
+              column_type: double precision
+
+      - name: release_clause_in_euro_millions
+        description: "Player release clause in millions of euros"
+        tests:
+          - dbt_expectations.expect_column_values_to_be_of_type:
+              column_type: double precision
+
+      - name: type_of_contract
+        description: "Type of contract (Contract, Loan, Free)"
+        tests:
+          - accepted_values:
+              values: ["Contract", "Loan", "Free"]

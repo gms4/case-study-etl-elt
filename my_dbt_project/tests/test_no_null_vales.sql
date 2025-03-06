@@ -1,3 +1,3 @@
 SELECT *
-FROM {{ ref('clean_fifa_model_elt') }}
+FROM {{ ref('ELT_clean_fifa_model') }}
 WHERE id IS NULL

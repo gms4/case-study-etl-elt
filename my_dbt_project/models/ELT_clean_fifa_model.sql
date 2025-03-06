@@ -39,13 +39,13 @@ WITH cleaned_data AS (
             CAST("Mentality" / 6 AS INT) AS "mentality",
             CAST("Defending" / 3 AS INT) AS "defending",
             CAST("Goalkeeping" / 5 AS INT) AS "goalkeeping",
-            {{ strip_affix('"W/F"', '★') }} AS "wf",
-            {{ strip_affix('"SM"', '★') }} AS "sm",
+            CAST({{ strip_affix('"W/F"', '★') }} AS INT) AS "wf",
+            CAST({{ strip_affix('"SM"', '★') }} AS INT) AS "sm",
             "A/W" AS "aw",
             "D/W" AS "dw",
-            {{ strip_affix('"IR"', '★') }} AS "ir",
+            CAST({{ strip_affix('"IR"', '★') }} AS INT) AS "ir",
             {{ convert_hits('"Hits"') }} AS "hits"
-        FROM {{ source('staging', 'unclean_fifa_model_elt') }}
+        FROM {{ source('staging', 'staging_fifa_model_elt') }}
     ) raw_data
 )
 
