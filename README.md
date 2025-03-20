@@ -63,7 +63,15 @@ To run the ELT Pipeline, follow these steps:
 
 1. Execute the `estudo_de_caso_elt.ipynb` script.
 2. Navigate to the `my_dbt_project` directory.
-3. Run the following command:
+3. Run the following command to run tests:
+   ```bash
+   dbt test
+   ```
+4. Run the following command to generate and visualize documentation:
+   ```bash
+   dbt docs generate && dbt docs serve
+   ```
+3. Run the following command to run the full project:
    ```bash
    dbt run
    ```
