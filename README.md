@@ -36,7 +36,7 @@ After installation, start Jupyter Notebook with:
 jupyter notebook
 ```
 
-This will open an interface in your browser where you can write and execute code interactively.
+This will open an interface in your browser where you can write and execute code interactively. You could also add Jupyter Notebook's extension to your VSCode and run the project locally.
 
 ### 6. Install and Configure dbt
 **dbt** (Data Build Tool) is a tool used to transform and organize data within the database. It enables efficient data pipeline creation. To install dbt, use:
