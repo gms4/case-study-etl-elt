@@ -1,3 +1,4 @@
+
 # ETL/ELT Pipeline Project
 
 This project implements an ETL (Extract, Transform, Load) and ELT (Extract, Load, Transform) pipeline for data processing. Below are the necessary steps to set up the environment and execute the pipelines.
@@ -42,11 +43,50 @@ This will open an interface in your browser where you can write and execute code
 **dbt** (Data Build Tool) is a tool used to transform and organize data within the database. It enables efficient data pipeline creation. To install dbt, use:
 
 ```bash
-pip install dbt-core
+pip install dbt-core dbt-postgres
 ```
 
 Detailed dbt configuration instructions can be found in the official documentation:  
 [https://docs.getdbt.com](https://docs.getdbt.com).
+
+### 7. Configure dbt to Connect to PostgreSQL
+
+After installing dbt, you need to configure the connection to your PostgreSQL database using the `profiles.yml` file.
+
+1. Locate or create the `profiles.yml` file:
+   - **Linux/macOS:** `~/.dbt/profiles.yml`
+   - **Windows:** `%USERPROFILE%\.dbt\profiles.yml`
+
+2. Add the following configuration, replacing the placeholders with your own database credentials:
+
+```yaml
+my_dbt_project:
+  target: dev
+  outputs:
+    dev:
+      type: postgres
+      host: localhost
+      user: your_username
+      password: your_password
+      port: 5432
+      dbname: your_database
+      schema: analytics
+      threads: 4
+```
+
+3. To test your connection, run:
+
+```bash
+dbt debug
+```
+
+4. If you haven’t created your project yet, you can initialize one with:
+
+```bash
+dbt init my_dbt_project
+```
+
+This will create the standard folder structure for a dbt project.
 
 ---
 
@@ -71,15 +111,14 @@ To run the ELT Pipeline, follow these steps:
    ```bash
    dbt docs generate && dbt docs serve
    ```
-3. Run the following command to run the full project:
+5. Run the following command to run the full project:
    ```bash
    dbt run
    ```
-4. Check the `staging.staging_fifa_model_elt` table in the PostgreSQL database to see the raw data.
-5. Check the `analytics.elt_clean_fifa_model` table in the PostgreSQL database to see the processed data.
+6. Check the `staging.staging_fifa_model_elt` table in the PostgreSQL database to see the raw data.
+7. Check the `analytics.elt_clean_fifa_model` table in the PostgreSQL database to see the processed data.
 
 ---
 
 ## Final Considerations
 This project demonstrates the implementation of ETL and ELT pipelines for data processing using tools such as Python, Kaggle, PostgreSQL, Jupyter Notebook, and dbt. Follow the steps above to set up your environment and execute the pipelines.
-
